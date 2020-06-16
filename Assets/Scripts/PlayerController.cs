@@ -46,10 +46,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void FindRelativePosForHingeJoint(Vector3 blockPosition)
+    public void FindRelativePosForHingeJoint(Vector3 blockPosition,float blockHeight=10)
     {
         transform.rotation = Quaternion.identity;
-        hJoint.anchor = (blockPosition - transform.position);
+        hJoint.anchor = (blockPosition - transform.position-Vector3.up*blockHeight*.5f);
         lRenderer.SetPosition(1, hJoint.anchor);
         lRenderer.enabled = true;
     }
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour {
             hJoint = gameObject.AddComponent<HingeJoint>();
             var target = BlockCreator.GetSingleton().GetRelativeBlock(transform.position);
             if (target != null)
-                FindRelativePosForHingeJoint(target.position);
+                FindRelativePosForHingeJoint(target.position, target.lossyScale.y);
             else
                 print("NoTarget");
         }

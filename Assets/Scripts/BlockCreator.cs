@@ -92,7 +92,7 @@ public class BlockCreator : MonoBehaviour {
 
     public Transform GetRelativeBlock(Vector3 playerPos)
     {
-        Vector3 dir = (Vector3.forward  + Vector3.up).normalized;
+        Vector3 dir = (Vector3.forward  + Vector3.up*2).normalized;
         Debug.DrawLine(playerPos, dir*100+ playerPos, Color.red,5);
         if (Physics.Raycast(playerPos, dir, out RaycastHit hit, 100,wallLayer))
         {
